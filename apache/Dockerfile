@@ -12,9 +12,6 @@ RUN set -ex; \
         ffmpeg \
         imagemagick \
         ghostscript \
-        smbclient \
-        supervisor \
-#       libreoffice \
     ; \
     rm -rf /var/lib/apt/lists/*
     
