@@ -9,19 +9,22 @@ I recommend activate the cron scheduler, which is part of the image. Go to Setti
 
 # Config.php
 I recommend activate the cron scheduler, which is part of the image. Go to Settings -> Basic Settings and select the option "Cron" for the Background jobs. That's make the web interface more responsive, especially with a lot of files or if you have many users. Background jobs are executed every 5 minutes.
-  'enable_previews' => true,
-  'enabledPreviewProviders' => 
-  array (
-    0 => 'OC\\Preview\\Image',
-    1 => 'OC\\Preview\\Movie',
-    2 => 'OC\\Preview\\MP4',
-    3 => 'OC\\Preview\\MOV',
-  ),
-  'preview_max_x' => 500,
-  'preview_max_y' => 500,
+
+    'enable_previews' => true,
+    'enabledPreviewProviders' => 
+    array (
+      0 => 'OC\\Preview\\Image',
+      1 => 'OC\\Preview\\Movie',
+      2 => 'OC\\Preview\\MP4',
+      3 => 'OC\\Preview\\MOV',
+    ),
+    'preview_max_x' => 500,
+    'preview_max_y' => 500,
 
 # Terminal comand first time
-docker exec --user www-data Nextcloud php occ preview:generate-all
+    docker exec --user www-data Nextcloud php occ preview:generate-all
 
-# Cronjob for create new preview (my config at 1 time at night, if you have many content, need more than 1 time)
-docker exec -u www-data NextCloud php /var/www/html/occ preview:pre-generate -vvv
+# Cronjob for create new preview (my config at 1 time at night)
+    docker exec -u www-data NextCloud php /var/www/html/occ preview:pre-generate -vvv
+
+P/S if you have many content, need more than 1 time.
