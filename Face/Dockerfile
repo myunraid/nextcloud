@@ -1,5 +1,3 @@
-
-
 # Use a temporary image to compile and test the libraries
 FROM nextcloud:production-apache as builder
 
@@ -93,9 +91,6 @@ RUN set -ex; \
         gnupg \
         imagemagick \
         ghostscript \
- 
-
-
     ; \
 
 RUN set -ex; \
@@ -144,6 +139,4 @@ COPY supervisord.conf /
 ENV NEXTCLOUD_UPDATE=1
 ENV MEMORY_LIMIT=8G
 
-RUN echo '*/30 * * * * php -f /var/www/html/occ face:background_job -t 900' >> /var/spool/cron/crontabs/www-data
-RUN sed -i -e '/^<VirtualHost/,/<\/VirtualHost>/ { /<\/VirtualHost>/ i\Header always set Strict-Transport-Security "max-age=15552000; includeSubDomain"' -e '}' /etc/apache2/sites-enabled/000-default.conf
 CMD ["/usr/bin/supervisord", "-c", "/supervisord.conf"]
