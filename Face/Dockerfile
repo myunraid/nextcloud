@@ -43,7 +43,7 @@ RUN cd; \
     && make
 
 # If pass the tests, we are able to create the final image.
-FROM nextcloud:apache
+FROM nextcloud:production-apache
 
 # Install dependencies to image
 RUN apt-get update ; \
@@ -81,8 +81,6 @@ RUN set -ex; \
         libmagickcore-6.q16-6-extra \
         procps \
         smbclient \
-        supervisor \
-        libreoffice \
         vim \
         libfuse2 \
         fuse \
@@ -129,14 +127,5 @@ RUN set -ex; \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
 ;
 
-RUN mkdir -p \
-    /var/log/supervisord \
-    /var/run/supervisord \
-;
-
-COPY supervisord.conf /
-
 ENV NEXTCLOUD_UPDATE=1
 ENV MEMORY_LIMIT=8G
-
-CMD ["/usr/bin/supervisord", "-c", "/supervisord.conf"]
