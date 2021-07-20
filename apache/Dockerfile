@@ -9,6 +9,7 @@ RUN set -ex; \
         ffmpeg \
         imagemagick \
         ghostscript \
+        libmagickcore-6.q16-6-extra \
     ; \
     rm -rf /var/lib/apt/lists/*
     
